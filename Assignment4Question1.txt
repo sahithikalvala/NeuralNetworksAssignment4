@@ -1,0 +1,17 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+m = pd.read_csv('data.csv')
+m.head()
+m.describe()
+m.fillna(m.mean(), inplace=True)
+print(m)
+m[['Calories', 'Maxpulse']].agg(['min','max','count','mean'])
+m[(m['Calories'] >= 500) & (m['Calories'] <= 1000)]
+m[(m['Calories'] > 500) & (m['Maxpulse'] < 100)]
+df = m.drop('Maxpulse', axis=1)
+print(df)
+df['Calories'] = df['Calories'].astype(int)
+plt.scatter(df['Duration'], df['Calories'])
+plt.xlabel("Duration")
+plt.ylabel("Calories")
+plt.show()
